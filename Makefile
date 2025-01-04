@@ -1,10 +1,14 @@
 SHELL := /bin/bash
 
 .PHONY: up
-up: down
+up: down build-shared
 	cd frontend && npm install
 	cd microservices && npm install
 	docker-compose up --build -d
+
+.PHONY: build-shared
+build-shared:
+	cd shared && npm install && npm run build
 
 .PHONY: logs
 logs:

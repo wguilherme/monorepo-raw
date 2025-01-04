@@ -1,10 +1,10 @@
 SHELL := /bin/bash
 
 .PHONY: up
-up:
+up: down
 	cd frontend && npm install
 	cd microservices && npm install
-	docker-compose up -d
+	docker-compose up --build -d
 
 .PHONY: logs
 logs:

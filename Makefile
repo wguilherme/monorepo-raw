@@ -1,10 +1,12 @@
-.PHONY: up down stop start logs
+SHELL := /bin/bash
 
+.PHONY: up
 up:
 	cd frontend && npm install
 	cd microservices && npm install
 	docker-compose up -d
 
+.PHONY: logs
 logs:
 	@if [ "$(app)" = "" ]; then \
 		echo "Please specify an app name: make logs app=frontend|api"; \
@@ -12,11 +14,14 @@ logs:
 		docker-compose logs -f $(app); \
 	fi
 
+.PHONY: down
 down:
 	docker-compose down -v
 
+.PHONY: stop
 stop:
 	docker-compose stop
 
+.PHONY: start
 start:
 	docker-compose start
